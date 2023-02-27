@@ -1,0 +1,52 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Vocode",
+  "logo": {
+    "dark": "/logo/dark.png",
+    "light": "/logo/dark.png"
+  },
+  "favicon": "/favicon.png",
+  "modeToggle": {
+    "default": "dark",
+    "isHidden": true
+  },
+  "colors": {
+    "primary": "#0092e0",
+    "light": "#0092e0",
+    "dark": "#0092e0"
+  },
+  "topbarCtaButton": {
+    "name": "Schedule call",
+    "url": "https://calendly.com/vocode/15min"
+  },
+  "anchors": [
+    {
+      "name": "Contact",
+      "icon": "envelope",
+      "url": "mailto:kian@vocode.dev"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["welcome"]
+    },
+    {
+      "group": "Vocode 101",
+      "pages": ["what-is-vocode", "how-it-works", "how-to-use-it"]
+    },
+    {
+      "group": "Python SDK",
+      "pages": ["python-quickstart"]
+    },
+    {
+      "group": "React SDK",
+      "pages": ["react-quickstart"]
+    }
+  ],
+  "footerSocials": {
+    "twitter": "https://twitter.com/vocodehq",
+    "website": "https://www.vocode.dev/"
+  },
+  "backgroundImage": "images/background-image.png"
+}
