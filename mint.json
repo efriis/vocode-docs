@@ -37,7 +37,7 @@
     },
     {
       "group": "Python SDK",
-      "pages": ["python-quickstart"]
+      "pages": ["python-quickstart", "create-your-own-agent"]
     },
     {
       "group": "React SDK",
