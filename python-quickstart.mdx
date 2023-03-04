@@ -4,7 +4,9 @@ description: "Get up and running using our Python SDK"
 ---
 
 # Installation
+
 Inside your bash, install the vocode package:
+
 ```bash
 pip install vocode
 ```
@@ -12,19 +14,21 @@ pip install vocode
 To use your API key, do one of the following:
 
 1. Set it as an environment variable in a `.env` file:
+
 ```
 VOCODE_API_KEY={YOUR_API_KEY}
 ```
 
 2. Set it your code:
-```python 
+
+```python
 import vocode
 vocode.api_key = '{YOUR_API_KEY}'
 ```
 
 ## Conversation Class
 
-The Python SDK contains a `Conversation` class that allows you to 
+The Python SDK contains a `Conversation` class that allows you to
 spin up conversations quickly. The abstraction requires the following fields:
 
 <ParamField path="input_device" type="InputDevice" required={true}>
@@ -47,15 +51,19 @@ spin up conversations quickly. The abstraction requires the following fields:
   The configuration for speech synthesis.
 </ParamField>
 
-## Example: run a conversation in your terminal
+## Example: run a conversation locally
+
 First, we first need to create the IO devices used for
-the conversation. Vocode provides a simple helper method to do so for the 
+the conversation. Vocode provides a simple helper method to do so for the
 default IO devices on your computer:
-```python 
+
+```python
 create_microphone_input_and_speaker_output(use_first_available_device=True)
 ```
+
 Then, we need to define the `Conversation` class:
-```python 
+
+```python
 conversation = Conversation(
     input_device=microphone_input,
     output_device=speaker_output,
@@ -64,7 +72,8 @@ conversation = Conversation(
     synthesizer_config=AzureSynthesizerConfig.from_output_device(speaker_output)
 )
 ```
-Here, we use Deepgram for transcription, an LLM Agent, and Azure for speech synthesis. 
+
+Here, we use Deepgram for transcription, an LLM Agent, and Azure for speech synthesis.
 Putting it all together in a file you can run:
 
 ```python
