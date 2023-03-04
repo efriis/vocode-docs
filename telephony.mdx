@@ -1,0 +1,58 @@
+---
+title: "Working with phone calls"
+description: "How to use agents with inbound and outbound phone calls."
+---
+
+## Overview
+
+The Vocode SDK supports using agents with inbound and outbound phone calls. Users
+can [create their own agents](/create-your-own-agent) and use them
+to fulfill a variety of use cases like information collection, appointment scheduling,
+sales, customer support, and more.
+
+## Outbound Calls
+
+The `OutboundCall` class provides a simple abstraction for creating outbound calls.
+It has the following fields:
+
+### OutboundCall Class
+
+<ParamField path="recipient" type="CallEntity" required={true}>
+  The recipient entity for the phone call.
+</ParamField>
+
+<ParamField path="caller" type="CallEntity" required={true}>
+  The caller entity for the phone call.
+</ParamField>
+
+<ParamField path="agent_config" type="AgentConfig" required={true}>
+  The configuration for the AI agent.
+</ParamField>
+
+### Example: Making an outbound call
+
+```python
+from vocode.outbound_call import OutboundCall
+from vocode.models.telephony import CallEntity
+from vocode.models.agent import WebSocketUserImplementedAgentConfig
+
+if __name__ == '__main__':
+    call = OutboundCall(
+        recipient=CallEntity(
+            phone_number="+12345678900",
+        ),
+        caller=CallEntity(
+            phone_number="+12345678900",
+        ),
+        agent_config=WebSocketUserImplementedAgentConfig(
+            respond=WebSocketUserImplementedAgentConfig.RouteConfig(
+                url="ws://localhost:3001/respond"
+            )
+        )
+    )
+    call.start()
+```
+
+## Inbound Calls
+
+coming!

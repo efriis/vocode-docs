@@ -3,4 +3,42 @@ title: "Create your own AI Agent"
 description: "How to create a custom Agent for your use case."
 ---
 
-## Coming soon!
+## Overview
+
+The idea behind creating your own AI agent is allowing complete control over the AI
+layer of your application. Users will be responsible for implementing either a
+`RESTfulAgent` or a `WebSocketAgent` that the Vocode backend will use to generate responses.
+
+Both are just as easy to set up using the abstractions provided by the Vocode SDK. Note that the
+websocket implementation will have a marginally faster performance due to the decreased overhead
+for each query to the agent.
+
+## RESTful Implementation
+
+Here is an example implementation of a `RESTfulAgent` that just responds with the same input that
+it receives.
+
+```python
+from vocode.user_implemented_agent.restful_agent import RESTfulAgent
+
+class YourAgent(RESTfulAgent):
+
+    # input: the transcript from the Conversation that the agent must respond to
+    async def respond(self, input: str) -> str:
+        return input ## your response logic goes here
+```
+
+## WebSocket Implementation
+
+Here is an example implementation of a `WebSocketAgent` that just responds with the same input that
+it receives.
+
+```python
+from vocode.user_implemented_agent.websocket_agent import WebSocketAgent
+
+class YourAgent(WebSocketAgent):
+
+    # input: the transcript from the Conversation that the agent must respond to
+    async def respond(self, input: str) -> str:
+        return input ## your response logic goes here
+```

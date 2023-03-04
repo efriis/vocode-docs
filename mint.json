@@ -26,6 +26,11 @@
       "url": "mailto:kian@vocode.dev"
     }
   ],
+  "analytics": {
+    "posthog": {
+      "apiKey": "phc_D48lrsUUinkenYoeWRpfmQ3KGKRrawS5K6v3Nlda0g2"
+    }
+  },
   "navigation": [
     {
       "group": "Getting Started",
@@ -37,7 +42,7 @@
     },
     {
       "group": "Python SDK",
-      "pages": ["python-quickstart", "create-your-own-agent"]
+      "pages": ["python-quickstart", "create-your-own-agent", "telephony"]
     },
     {
       "group": "React SDK",
