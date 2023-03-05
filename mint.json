@@ -42,7 +42,7 @@
     },
     {
       "group": "Python SDK",
-      "pages": ["python-quickstart", "create-your-own-agent", "telephony"]
+      "pages": ["python-quickstart", "agent", "create-your-own-agent", "transcriber", "synthesizer", "telephony"]
     },
     {
       "group": "React SDK",
