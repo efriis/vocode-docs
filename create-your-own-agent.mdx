@@ -15,30 +15,38 @@ for each query to the agent.
 
 ## RESTful Implementation
 
-Here is an example implementation of a `RESTfulAgent` that just responds with the same input that
-it receives.
+Here is an example implementation of a `RESTfulAgent` that just echoes back whatever
+input it receives. Note that the `respond` method is expecting a `RESTfulAgentOutput` return value.
 
 ```python
 from vocode.user_implemented_agent.restful_agent import RESTfulAgent
+from vocode.models.agent import RESTfulAgentOutput, RESTfulAgentText, RESTfulAgentEnd
 
 class YourAgent(RESTfulAgent):
 
     # input: the transcript from the Conversation that the agent must respond to
-    async def respond(self, input: str) -> str:
-        return input ## your response logic goes here
+    async def respond(self, input: str) -> RESTfulAgentOutput:
+        if "bye" in input:
+            return RESTfulAgentEnd()  ## ends the conversation
+        else:
+            return RESTfulAgentText(response=input)  ## responds with the input received
 ```
 
 ## WebSocket Implementation
 
-Here is an example implementation of a `WebSocketAgent` that just responds with the same input that
-it receives.
+Here is an example implementation of a `WebSocketAgent` that just echoes back whatever input
+it receives. Note that the `respond` method is expecting a `WebSocketAgentMessage` return value.
 
 ```python
 from vocode.user_implemented_agent.websocket_agent import WebSocketAgent
+from vocode.models.agent import WebSocketAgentMessage, WebSocketAgentTextMessage, WebSocketAgentStopMessage
 
 class YourAgent(WebSocketAgent):
 
     # input: the transcript from the Conversation that the agent must respond to
-    async def respond(self, input: str) -> str:
-        return input ## your response logic goes here
+    async def respond(self, input: str) -> WebSocketAgentMessage:
+        if "bye" in input:
+            return WebSocketAgentStopMessage()  ## ends the conversation
+        else:
+            return WebSocketAgentTextMessage.from_text(input)  ## responds with the input received
 ```

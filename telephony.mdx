@@ -54,4 +54,29 @@ if __name__ == '__main__':
 
 ## Inbound Calls
 
-coming!
+The `InboundCall` class provides a simple abstraction to create an endpoint that can host your agent
+to respond to inbound calls. In order to implement an inbound call agent, start by defining an `InboundCall`
+like so:
+
+```python
+from vocode.telephony.inbound_call_server import InboundCallServer
+from vocode.models.agent import YourAgentConfig
+
+if __name__ == '__main__':
+    server = InboundCallServer(
+        agent_config=YourAgentConfig(initial_message="hello!")
+    )
+    server.run(port=3001)
+```
+
+This spins up a FastAPI web server with a `/vocode` route that returns a TwiML object that we will need in the next
+step.
+
+Next, we'll set up a programmable phone number on Twilio that can accept the TwiML object from
+above. To do this,
+
+1. Create a [Twilio](https://www.twilio.com/) account
+2. Once inside your dashboard, go to Phone Numbers -> Manage -> Buy a number to get a phone number.
+3. Then, go to Phone Numbers -> Manage -> Active Numbers and select the number you want to set up.
+4. Update the config to use a Webhook while making sure to use the correct URL
+   ![Setup](/images/twilio_number_config.png)
