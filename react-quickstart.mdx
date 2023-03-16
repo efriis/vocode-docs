@@ -3,7 +3,76 @@ title: "React Quickstart"
 description: "Get up and running using our React SDK"
 ---
 
-## Demo installation and setup
+# Installation
+
+`npm install vocode`
+
+# Usage
+
+## Setting up the conversation
+
+Similar to the Python Quickstart, we provide a TypeScript interface for the conversation configuration.
+
+```javascript
+import {
+  AudioDeviceConfig,
+  ConversationConfig,
+  ChatGPTAgentConfig,
+  DeepgramTranscriberConfig,
+  AzureSynthesizerConfig,
+  VocodeConfig,
+} from "vocode";
+
+const transcriberConfig: Omit<
+  DeepgramTranscriberConfig,
+  "samplingRate" | "audioEncoding"
+> = {
+  type: "transcriber_deepgram",
+  chunkSize: 2048,
+};
+const agentConfig: ChatGPTAgentConfig = {
+  type: "agent_chat_gpt",
+  initialMessage: {
+    type: "message_base",
+    text: "Hello!",
+  },
+  promptPreamble: "The AI is having a pleasant conversation about life",
+};
+const synthesizerConfig: Omit<
+  AzureSynthesizerConfig,
+  "samplingRate" | "audioEncoding"
+> = {
+  type: "synthesizer_azure",
+  shouldEncodeAsWav: true,
+};
+const vocodeConfig: VocodeConfig = {
+  apiKey: process.env.REACT_APP_VOCODE_API_KEY || "",
+};
+const audioDeviceConfig: AudioDeviceConfig = {};
+```
+
+## Running the conversation
+
+We provide a React hook to facilitate conversations created from the configuration above.
+
+```javascript
+import { useConversation } from "vocode";
+
+const { status, start, stop, analyserNode } = useConversation({
+  transcriberConfig,
+  agentConfig,
+  synthesizerConfig,
+  vocodeConfig,
+  audioDeviceConfig,
+});
+```
+
+- `start` opens the microphone stream and starts sending audio from the conversation to the user
+- `stop` closes the microphone and speaker streams
+- `status` is an enum that contains the status of the conversation, one of `idle`, `connecting`, `connected`, and `error`
+- `analyserNode` is an object (defined by the Web Audio API [here](https://developer.mozilla.org/en-US/docs/Web/API/AnalyserNode)) that allows for audio visualizations based on the audio output of the conversation
+
+# Demo installation and setup
 
 Clone the `vocode-react-demo` [repository](https://github.com/vocodedev/vocode-react-demo).
 
@@ -28,7 +97,3 @@ Start the application
 ```
 $ npm start
 ```
-
-## Understanding the useConversation hook
-
-coming soon!

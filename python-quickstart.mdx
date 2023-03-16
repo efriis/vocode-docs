@@ -11,15 +11,7 @@ Inside your bash, install the vocode package:
 pip install vocode
 ```
 
-To use your API key, do one of the following:
-
-1. Set it as an environment variable in a `.env` file:
-
-```
-VOCODE_API_KEY={YOUR_API_KEY}
-```
-
-2. Set it your code:
+To use your API key, at the top of your file, set the API key on the module as follows:
 
 ```python
 import vocode
@@ -51,15 +43,19 @@ spin up conversations quickly. The abstraction requires the following fields:
   The configuration for speech synthesis.
 </ParamField>
 
-## Example: run a conversation locally
+## Example: run a conversation in your terminal
 
-First, we first need to create the IO devices used for
+First, we first need to create the I/O devices used for
 the conversation. Vocode provides a simple helper method to do so for the
-default IO devices on your computer:
+default I/O devices on your computer:
 
 ```python
-create_microphone_input_and_speaker_output(use_first_available_device=True)
+microphone_input, speaker_output = create_microphone_input_and_speaker_output(
+    use_default_devices=True
+)
 ```
+
+If the default I/O devices are not being set properly, set `use_default_devices` to `False` to select them before kicking off the conversation.
 
 Then, we need to define the `Conversation` class:
 
@@ -68,35 +64,47 @@ conversation = Conversation(
     input_device=microphone_input,
     output_device=speaker_output,
     transcriber_config=DeepgramTranscriberConfig.from_input_device(microphone_input),
-    agent_config=LLMAgentConfig(prompt_preamble="The AI is having a pleasant conversation about life."),
+    agent_config=ChatGPTAgentConfig(
+      initial_message=BaseMessage(text="Hello!"),
+      prompt_preamble="The AI is having a pleasant conversation about life."
+    ),
     synthesizer_config=AzureSynthesizerConfig.from_output_device(speaker_output)
 )
 ```
 
-Here, we use Deepgram for transcription, an LLM Agent, and Azure for speech synthesis.
+Here, we use Deepgram for transcription, a ChatGPT Agent that kicks off the conversation with "Hello!", and Azure for speech synthesis.
 Putting it all together in a file you can run:
 
 ```python
 
 import asyncio
 import signal
+import vocode
+
+vocode.api_key = "YOUR_API_KEY"
 
 from vocode.conversation import Conversation
 from vocode.helpers import create_microphone_input_and_speaker_output
 from vocode.models.transcriber import DeepgramTranscriberConfig
-from vocode.models.agent import LLMAgentConfig
+from vocode.models.agent import ChatGPTAgentConfig
 from vocode.models.synthesizer import AzureSynthesizerConfig
 
 if __name__ == "__main__":
-    microphone_input, speaker_output = create_microphone_input_and_speaker_output(use_first_available_device=True)
+    microphone_input, speaker_output = create_microphone_input_and_speaker_output(
+        use_default_devices=True
+    )
 
     conversation = Conversation(
         input_device=microphone_input,
         output_device=speaker_output,
         transcriber_config=DeepgramTranscriberConfig.from_input_device(microphone_input),
-        agent_config=LLMAgentConfig(prompt_preamble="The AI is having a pleasant conversation about life."),
+        agent_config=ChatGPTAgentConfig(
+          initial_message=BaseMessage(text="Hello!"),
+          prompt_preamble="The AI is having a pleasant conversation about life."
+        ),
         synthesizer_config=AzureSynthesizerConfig.from_output_device(speaker_output)
     )
+    # This allows you to stop the conversation with a KeyboardInterrupt
     signal.signal(signal.SIGINT, lambda _0, _1: conversation.deactivate())
     asyncio.run(conversation.start())
 ```
