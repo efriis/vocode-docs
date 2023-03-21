@@ -54,29 +54,42 @@ if __name__ == '__main__':
 
 ## Inbound Calls
 
-The `InboundCall` class provides a simple abstraction to create an endpoint that can host your agent
-to respond to inbound calls. In order to implement an inbound call agent, start by defining an `InboundCall`
+The `InboundCallServer` class provides a simple abstraction to create an endpoint that can host your agent
+to respond to inbound calls. In order to implement an inbound call agent, start by defining an `InboundCallServer`
 like so:
 
 ```python
 from vocode.telephony.inbound_call_server import InboundCallServer
-from vocode.models.agent import YourAgentConfig
+from vocode.models.agent import EchoAgentConfig
+from vocode.models.message import BaseMessage
+from vocode.models.telephony import TwilioConfig
 
 if __name__ == '__main__':
     server = InboundCallServer(
-        agent_config=YourAgentConfig(initial_message="hello!")
+        agent_config=EchoAgentConfig(initial_message=BaseMessage(text="hello!")),
+        twilio_config=TwilioConfig(
+            account_sid=os.getenv("TWILIO_ACCOUNT_SID"),
+            auth_token=os.getenv("TWILIO_AUTH_TOKEN"),
+        )
     )
     server.run(port=3001)
 ```
 
 This spins up a FastAPI web server with a `/vocode` route that returns a TwiML object that we will need in the next
-step.
+step. If you're using our [Replit template](https://replit.com/@vocode/Inbound-Call-Server), this is already set up for you!
 
 Next, we'll set up a programmable phone number on Twilio that can accept the TwiML object from
 above. To do this,
 
 1. Create a [Twilio](https://www.twilio.com/) account
-2. Once inside your dashboard, go to Phone Numbers -> Manage -> Buy a number to get a phone number.
-3. Then, go to Phone Numbers -> Manage -> Active Numbers and select the number you want to set up.
-4. Update the config to use a Webhook while making sure to use the correct URL
-   ![Setup](/images/twilio_number_config.png)
+2. Find your Twilio credentials: this is found on under _Account Info_ in the dashboard.
+   > Tip: if you already have existing Twilio integrations, set up the number in a [subaccount](https://support.twilio.com/hc/en-us/articles/360011132374-Getting-Started-with-Twilio-Accounts-and-Subaccounts)
+3. Set up `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your environment. If you're using Replit, use [Replit secrets](https://docs.replit.com/programming-ide/workspace-features/storing-sensitive-information-environment-variables). Otherwise, packages like [python-dotenv](https://pypi.org/project/python-dotenv/) are useful for this.
+4. Once inside your dashboard, go to Phone Numbers -> Manage -> Buy a number to get a phone number.
+5. Then, go to Phone Numbers -> Manage -> Active Numbers and select the number you want to set up.
+6. Update the config to point the Webhook URL to the `/vocode` route we just set up.
+   > If you're using the Replit template, use the provided hosted URL that looks something like `https://<repl>.<username>.repl.co/vocode`
+
+![Setup](/images/twilio_number_config.png)
+
+7. Hit **Save** and call the number!
