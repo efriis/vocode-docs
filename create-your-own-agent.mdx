@@ -19,8 +19,8 @@ Here is an example implementation of a `RESTfulAgent` that just echoes back what
 input it receives. Note that the `respond` method is expecting a `RESTfulAgentOutput` return value.
 
 ```python
-from vocode.user_implemented_agent.restful_agent import RESTfulAgent
-from vocode.models.agent import RESTfulAgentOutput, RESTfulAgentText, RESTfulAgentEnd
+from vocode.streaming.user_implemented_agent.restful_agent import RESTfulAgent
+from vocode.streaming.models.agent import RESTfulAgentOutput, RESTfulAgentText, RESTfulAgentEnd
 
 class YourAgent(RESTfulAgent):
 
@@ -38,8 +38,8 @@ Here is an example implementation of a `WebSocketAgent` that just echoes back wh
 it receives. Note that the `respond` method is expecting a `WebSocketAgentMessage` return value.
 
 ```python
-from vocode.user_implemented_agent.websocket_agent import WebSocketAgent
-from vocode.models.agent import WebSocketAgentMessage, WebSocketAgentTextMessage, WebSocketAgentStopMessage
+from vocode.streaming.user_implemented_agent.websocket_agent import WebSocketAgent
+from vocode.streaming.models.agent import WebSocketAgentMessage, WebSocketAgentTextMessage, WebSocketAgentStopMessage
 
 class YourAgent(WebSocketAgent):
 

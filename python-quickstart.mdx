@@ -5,13 +5,13 @@ description: "Get up and running using our Python SDK"
 
 # Installation
 
-Inside your bash, install the vocode package:
+Inside your bash, install the [vocode package](https://pypi.org/project/vocode/):
 
 ```bash
 pip install vocode
 ```
 
-To use your API key, at the top of your file, set the API key on the module as follows:
+To use your API key, set the API key on the module as follows:
 
 ```python
 import vocode
@@ -20,7 +20,7 @@ vocode.api_key = '{YOUR_API_KEY}'
 
 ## Conversation Class
 
-The Python SDK contains a `Conversation` class that allows you to
+The Python SDK contains a `StreamingConversation` class that allows you to
 spin up conversations quickly. The abstraction requires the following fields:
 
 <ParamField path="input_device" type="InputDevice" required={true}>
@@ -57,10 +57,10 @@ microphone_input, speaker_output = create_microphone_input_and_speaker_output(
 
 If the default I/O devices are not being set properly, set `use_default_devices` to `False` to select them before kicking off the conversation.
 
-Then, we need to define the `Conversation` class:
+Then, we need to define our `StreamingConversation` instance:
 
 ```python
-conversation = Conversation(
+conversation = StreamingConversation(
     input_device=microphone_input,
     output_device=speaker_output,
     transcriber_config=DeepgramTranscriberConfig.from_input_device(microphone_input),
@@ -83,18 +83,18 @@ import vocode
 
 vocode.api_key = "YOUR_API_KEY"
 
-from vocode.conversation import Conversation
-from vocode.helpers import create_microphone_input_and_speaker_output
-from vocode.models.transcriber import DeepgramTranscriberConfig
-from vocode.models.agent import ChatGPTAgentConfig
-from vocode.models.synthesizer import AzureSynthesizerConfig
+from vocode.streaming.streaming_conversation import StreamingConversation
+from vocode.streaming.helpers import create_microphone_input_and_speaker_output
+from vocode.streaming.models.transcriber import DeepgramTranscriberConfig
+from vocode.streaming.models.agent import ChatGPTAgentConfig
+from vocode.streaming.models.synthesizer import AzureSynthesizerConfig
 
 if __name__ == "__main__":
     microphone_input, speaker_output = create_microphone_input_and_speaker_output(
         use_default_devices=True
     )
 
-    conversation = Conversation(
+    conversation = StreamingConversation(
         input_device=microphone_input,
         output_device=speaker_output,
         transcriber_config=DeepgramTranscriberConfig.from_input_device(microphone_input),

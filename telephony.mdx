@@ -31,9 +31,9 @@ The `OutboundCall` class provides a simple abstraction for creating outbound cal
 ### Example: Making an outbound call
 
 ```python
-from vocode.telephony.outbound_call import OutboundCall
-from vocode.models.telephony import CallEntity
-from vocode.models.agent import WebSocketUserImplementedAgentConfig
+from vocode.streaming.telephony.outbound_call import OutboundCall
+from vocode.streaming.models.telephony import CallEntity
+from vocode.streaming.models.agent import WebSocketUserImplementedAgentConfig
 
 if __name__ == '__main__':
     call = OutboundCall(
@@ -59,10 +59,10 @@ to respond to inbound calls. In order to implement an inbound call agent, start 
 like so:
 
 ```python
-from vocode.telephony.inbound_call_server import InboundCallServer
-from vocode.models.agent import EchoAgentConfig
-from vocode.models.message import BaseMessage
-from vocode.models.telephony import TwilioConfig
+from vocode.streaming.telephony.inbound_call_server import InboundCallServer
+from vocode.streaming.models.agent import EchoAgentConfig
+from vocode.streaming.models.message import BaseMessage
+from vocode.streaming.models.telephony import TwilioConfig
 
 if __name__ == '__main__':
     server = InboundCallServer(
