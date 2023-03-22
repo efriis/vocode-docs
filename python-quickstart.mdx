@@ -5,7 +5,7 @@ description: "Get up and running using our Python SDK"
 
 # Installation
 
-Inside your bash, install the [vocode package](https://pypi.org/project/vocode/):
+Install the [vocode package](https://pypi.org/project/vocode/):
 
 ```bash
 pip install vocode
@@ -18,7 +18,7 @@ import vocode
 vocode.api_key = '{YOUR_API_KEY}'
 ```
 
-## Conversation Class
+## The `StreamingConversation` Class
 
 The Python SDK contains a `StreamingConversation` class that allows you to
 spin up conversations quickly. The abstraction requires the following fields:
@@ -76,7 +76,6 @@ Here, we use Deepgram for transcription, a ChatGPT Agent that kicks off the conv
 Putting it all together in a file you can run:
 
 ```python
-
 import asyncio
 import signal
 import vocode
@@ -84,10 +83,11 @@ import vocode
 vocode.api_key = "YOUR_API_KEY"
 
 from vocode.streaming.streaming_conversation import StreamingConversation
-from vocode.streaming.helpers import create_microphone_input_and_speaker_output
+from vocode.helpers import create_microphone_input_and_speaker_output
 from vocode.streaming.models.transcriber import DeepgramTranscriberConfig
 from vocode.streaming.models.agent import ChatGPTAgentConfig
 from vocode.streaming.models.synthesizer import AzureSynthesizerConfig
+from vocode.streaming.models.message import BaseMessage
 
 if __name__ == "__main__":
     microphone_input, speaker_output = create_microphone_input_and_speaker_output(
