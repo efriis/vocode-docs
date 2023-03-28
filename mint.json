@@ -16,8 +16,8 @@
     "dark": "#0092e0"
   },
   "topbarCtaButton": {
-    "name": "Schedule call",
-    "url": "https://calendly.com/vocode/15min"
+    "name": "Join our discord",
+    "url": "https://discord.gg/NaU4mMgcnC"
   },
   "anchors": [
     {
@@ -41,11 +41,11 @@
       "pages": ["what-is-vocode", "how-it-works", "how-to-use-it"]
     },
     {
-      "group": "Python SDK",
+      "group": "Python",
       "pages": ["python-quickstart", "agent", "create-your-own-agent", "transcriber", "synthesizer", "telephony"]
     },
     {
-      "group": "React SDK",
+      "group": "React",
       "pages": ["react-quickstart"]
     }
   ],
