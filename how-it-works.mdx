@@ -17,12 +17,12 @@ And all of this is done via orchestration of:
 2. AI/NLU Layer
 3. Speech Synthesis
 
-The Vocode SDK has conveniently abstracted away much of the complexity while giving
+Vocode conveniently abstracts away much of the complexity while giving
 developers the flexibility to control every piece of the conversation.
 
 ## Our core abstraction: the Conversation
 
-The Vocode SDK breaks down a Conversation into 5 core pieces:
+Vocode breaks down a Conversation into 5 core pieces:
 
 1. Transcriber (used for speech recognition)
 2. Agent (AI/NLU layer)
@@ -31,11 +31,11 @@ The Vocode SDK breaks down a Conversation into 5 core pieces:
 5. Output Device (speaker for audio out)
 
 In order to run an entire conversation, developers can specify each of these 5 pieces
-with the various config types provided by Vocode.
+with the various types provided by Vocode.
 
-As an example, there are several `TranscriberConfig` options (ex.
-`DeepgramTranscriberConfig`, `AssemblyAITranscriberConfig`, `GoogleTranscriberConfig`) that allow you to specify
+As an example, there are several `Transcriber` options (ex.
+`DeepgramTranscriber`, `AssemblyAITranscriber`, `GoogleTranscriber`) that allow you to specify
 which providers you would like to use and their parameters.
 
-After specifying all of the configs, the Vocode SDK handles everything else necessary
+After specifying all of the types, Vocode handles everything else necessary
 to have the conversation.
