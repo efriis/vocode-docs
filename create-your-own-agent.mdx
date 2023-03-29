@@ -8,7 +8,6 @@ description: "How to create a custom Agent for your use case."
 The [`BaseAgent`](https://github.com/vocodedev/vocode-python/blob/main/vocode/streaming/agent/base_agent.py) class that is passed into [`StreamingConversation`](https://github.com/vocodedev/vocode-python/blob/main/vocode/streaming/streaming_conversation.py) has the following interface:
 
 ```python
-
 class BaseAgent:
     def __init__(self, agent_config: AgentConfig):
         self.agent_config = agent_config
