@@ -44,9 +44,9 @@ The `OutboundCall` class provides a simple abstraction for creating outbound cal
 ### Example: Making an outbound call
 
 ```python
-from vocode.streaming.telephony.outbound_call import OutboundCall
+from vocode.streaming.telephony.hosted.outbound_call import OutboundCall
 from vocode.streaming.models.telephony import CallEntity
-from vocode.streaming.models.agent import WebSocketUserImplementedAgentConfig
+from vocode.streaming.models.agent import ChatGPTAgentConfig
 
 if __name__ == '__main__':
     call = OutboundCall(
@@ -56,13 +56,14 @@ if __name__ == '__main__':
         caller=CallEntity(
             phone_number="+12345678900",
         ),
-        agent_config=WebSocketUserImplementedAgentConfig(
-            respond=WebSocketUserImplementedAgentConfig.RouteConfig(
-                url="ws://localhost:3001/respond"
-            )
-        )
+        agent_config=ChatGPTAgentConfig(
+            initial_message=BaseMessage(text="Hello!"),
+            prompt_preamble="Have a pleasant conversation about life",
+        ),
     )
     call.start()
+    input("Press enter to end the call...")
+    call.end()
 ```
 
 ## Inbound Calls
@@ -72,7 +73,7 @@ to respond to inbound calls. In order to implement an inbound call agent, start 
 like so:
 
 ```python
-from vocode.streaming.telephony.inbound_call_server import InboundCallServer
+from vocode.streaming.telephony.hosted.inbound_call_server import InboundCallServer
 from vocode.streaming.models.agent import EchoAgentConfig
 from vocode.streaming.models.message import BaseMessage
 from vocode.streaming.models.telephony import TwilioConfig
@@ -85,7 +86,7 @@ if __name__ == '__main__':
             auth_token=os.getenv("TWILIO_AUTH_TOKEN"),
         )
     )
-    server.run(port=3001)
+    server.run(port=3000)
 ```
 
 This spins up a FastAPI web server with a `/vocode` route that returns a TwiML object that we will need in the next
@@ -100,7 +101,7 @@ above. To do this,
 3. Set up `TWILIO_ACCOUNT_SID` and `TWILIO_AUTH_TOKEN` in your environment. If you're using Replit, use [Replit secrets](https://docs.replit.com/programming-ide/workspace-features/storing-sensitive-information-environment-variables). Otherwise, packages like [python-dotenv](https://pypi.org/project/python-dotenv/) are useful for this.
 4. Once inside your dashboard, go to Phone Numbers -> Manage -> Buy a number to get a phone number.
 5. Then, go to Phone Numbers -> Manage -> Active Numbers and select the number you want to set up.
-6. Update the config to point the Webhook URL to the `/vocode` route we just set up.
+6. Update the config to point the Webhook URL to the `/vocode` route we just set up. [ngrok](https://ngrok.com/) one option to quickly to host the server.
    > If you're using the Replit template, use the provided hosted URL that looks something like `https://<repl>.<username>.repl.co/vocode`
 
 ![Setup](/images/twilio_number_config.png)
