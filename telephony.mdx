@@ -29,7 +29,17 @@ The `OutboundCall` class provides a simple abstraction for creating outbound cal
 
 ### OutboundCall Class
 
+<ParamField path="recipient" type="CallEntity" required={true}>
+  The recipient entity for the phone call.
+</ParamField>
 
+<ParamField path="caller" type="CallEntity" required={true}>
+  The caller entity for the phone call.
+</ParamField>
+
+<ParamField path="agent_config" type="AgentConfig" required={true}>
+  The configuration for the AI agent.
+</ParamField>
 
 ### Example: Making an outbound call
 
