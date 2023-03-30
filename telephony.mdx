@@ -48,6 +48,11 @@ from vocode.streaming.telephony.hosted.outbound_call import OutboundCall
 from vocode.streaming.models.telephony import CallEntity
 from vocode.streaming.models.agent import ChatGPTAgentConfig
 
+vocode.setenv(
+    TWILIO_ACCOUNT_SID=os.getenv("TWILIO_ACCOUNT_SID"),
+    TWILIO_AUTH_TOKEN=os.getenv("TWILIO_AUTH_TOKEN"),
+)
+
 if __name__ == '__main__':
     call = OutboundCall(
         recipient=CallEntity(
