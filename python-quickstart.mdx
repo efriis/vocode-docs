@@ -166,3 +166,8 @@ if __name__ == "__main__":
     signal.signal(signal.SIGINT, lambda _0, _1: conversation.deactivate())
     asyncio.run(conversation.start())
 ```
+
+## A note on echo cancellation
+
+As of now, there is no echo cancellation enabled for system audio conversation, so this works best with headphones, otherwise the bot audio feeds back into the input audio stream.
+Stay tuned for updates here, tracking in [this GitHub issue](https://github.com/vocodedev/vocode-python/issues/16).
