@@ -11,12 +11,11 @@ Or, start from our [Replit template](https://replit.com/@vocode/Simple-Conversat
 
 # Usage
 
-Our React library only works with our hosted conversations right now, self-hosting is coming soon!
-So, you'll need to get an API key from our [dashboard](https://app.vocode.dev/) to get started.
-
 ## Setting up the conversation
 
-Similar to the Python Quickstart, we provide a TypeScript interface for the conversation configuration.
+### Hosted
+
+You'll need to get an API key from our [dashboard](https://app.vocode.dev/) to get started. Similar to the Python Quickstart, we provide a TypeScript interface for the conversation configuration.
 
 ```javascript
 import {
@@ -54,6 +53,18 @@ const vocodeConfig: VocodeConfig = {
   apiKey: process.env.REACT_APP_VOCODE_API_KEY || "",
 };
 const audioDeviceConfig: AudioDeviceConfig = {};
+```
+
+### Self-hosted (experimental)
+
+More docs coming soon! For now, check out https://github.com/vocodedev/vocode-python/blob/main/examples/client_backend.py for hosting the backend.
+You can use the `useConversation` hook with your self-hosted backend as follows:
+
+```javascript
+const { status, start, stop, analyserNode } = useConversation({
+  backendUrl: "<YOUR_BACKEND_URL>", // looks like wss://<base_url>/conversation",
+  audioDeviceConfig: {},
+});
 ```
 
 ## Running the conversation
