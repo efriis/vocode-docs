@@ -42,12 +42,11 @@
     },
     {
       "group": "Guides",
-      "pages": ["streaming-conversation", "turn-based-conversation", "telephony", "create-your-own-agent", "agent-executor", "react"]
+      "pages": ["python-quickstart", "telephony", "create-your-own-agent", "agent-executor", "react", "turn-based-conversation"]
     },  
     {
       "group": "Python",
       "pages": [
-        "python-quickstart",
         "transcriber-reference",
         "agent-reference",
         "synthesizer-reference"
