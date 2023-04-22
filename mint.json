@@ -16,8 +16,8 @@
     "dark": "#0092e0"
   },
   "topbarCtaButton": {
-    "name": "Join our discord",
-    "url": "https://discord.gg/NaU4mMgcnC"
+    "name": "Star us on GitHub!",
+    "url": "https://github.com/vocodedev/vocode-python"
   },
   "anchors": [
     {
