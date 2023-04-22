@@ -41,12 +41,13 @@
       "pages": ["what-is-vocode", "how-it-works", "how-to-use-it"]
     },
     {
+      "group": "Guides",
+      "pages": ["streaming-conversation", "turn-based-conversation", "telephony", "create-your-own-agent", "agent-executor", "react"]
+    },  
+    {
       "group": "Python",
       "pages": [
         "python-quickstart",
-        "create-your-own-agent",
-        "telephony",
-        "turn-based-conversation",
         "transcriber-reference",
         "agent-reference",
         "synthesizer-reference"
