@@ -21,6 +21,11 @@
   },
   "anchors": [
     {
+      "name": "Community",
+      "icon": "discord",
+      "url": "https://discord.gg/NaU4mMgcnC"
+    },
+    {
       "name": "Contact",
       "icon": "envelope",
       "url": "mailto:kian@vocode.dev"
