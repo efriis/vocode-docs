@@ -42,7 +42,7 @@
     },
     {
       "group": "Guides",
-      "pages": ["python-quickstart", "telephony", "create-your-own-agent", "agent-executor", "react", "turn-based-conversation"]
+      "pages": ["python-quickstart", "telephony", "create-your-own-agent", "agent-executor", "react", "turn-based-conversation", "language-support"]
     },  
     {
       "group": "Python",
